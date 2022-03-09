@@ -87,7 +87,6 @@ trainer = Trainer(
 )
 
     
-    
     # Choose among schedulers:
     # https://docs.ray.io/en/latest/tune/api_docs/schedulers.html
     #scheduler=ASHAScheduler(metric="objective", mode="max"))
