@@ -72,7 +72,8 @@ training_args = TrainingArguments(
     save_steps=1000,
     evaluation_strategy = "epoch", # evaluate at the end of every epoch
     learning_rate=2e-5,
-    weight_decay=0.01
+    weight_decay=0.01,
+    disable_tqdm=True
 )
 
 ### LOOKED AT THESE ARGUMENTS AND IT LOOKED GOOD: I DID put in the compute metrics, model init, and put in the right training and val data
