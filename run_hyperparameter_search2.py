@@ -58,7 +58,7 @@ test_data = boolq.BoolQDataset(test_df, tokenizer)
 
 ### NEED TO LOOK AT THIS AND NOT SURE WHERE LOGGING AND MODEL CHECKPOINTS AND ALL OF THAT GO TO BE HONEST.
 training_args = TrainingArguments(
-    output_dir="/scratch/pfi203/hw3/outputs",
+    output_dir="/scratch/pfi203/hw3/outputs2",
     #output_dir="/home/pranab/Natural Language Understanding/HW 3/outputs",
     #output_dir="outputs",
     overwrite_output_dir=True,
