@@ -58,7 +58,7 @@ test_data = boolq.BoolQDataset(test_df, tokenizer)
 
 ### NEED TO LOOK AT THIS AND NOT SURE WHERE LOGGING AND MODEL CHECKPOINTS AND ALL OF THAT GO TO BE HONEST.
 training_args = TrainingArguments(
-    output_dir="/scratch/pfi203/dsga1012/hw3/outputs",
+    output_dir="/scratch/pfi203/hw3/outputs",
     #output_dir="/home/pranab/Natural Language Understanding/HW 3/outputs",
     #output_dir="outputs",
     overwrite_output_dir=True,
@@ -66,7 +66,7 @@ training_args = TrainingArguments(
     do_eval=True,
     per_gpu_train_batch_size=8,
     per_gpu_eval_batch_size=64,
-    num_train_epochs=0.5, # due to time/computation constraints
+    num_train_epochs=4, # due to time/computation constraints
     logging_steps=500,
     logging_first_step=True,
     save_steps=1000,
@@ -92,17 +92,17 @@ trainer = Trainer(
     #scheduler=ASHAScheduler(metric="objective", mode="max"))
 def hp_space_call(trial):
     
-    return {"learning_rate": tune.loguniform(1e-3, 1e-2)}#, 3e-5, 4e-5, 5e-5]}
+    return {"learning_rate": tune.loguniform(1e-5, 5e-5)}#, 3e-5, 4e-5, 5e-5]}
 
 def main():
     #trainer.train() ## i think im supposed to skip this
     print("hyperparam search model")
     best_trial = trainer.hyperparameter_search(
     hp_space=hp_space_call,
-    direction="minimize",
+    direction="maximize",
     backend="ray",
-    search_alg=BayesOptSearch(mode="min"),
-    n_trials=2,
+    search_alg=BayesOptSearch(mode="max"),
+    n_trials=10,
     compute_objective=lambda x: x['eval_accuracy']
 )
     print("After hyperparam search, best run below:")
